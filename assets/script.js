@@ -2,7 +2,7 @@ var startButton = document.getElementById('start-btn')
 var questionEl = document.getElementById('question.card')
 var questionTxt= document.getElementById('question')
 var answerBtn= document.getElementById('Answers')
-var nextButton = document.getElementById('next-btn')
+var nextButton = document.getElementById('next-button')
 let shuffledQuestions, currentQuestionIndex
 // set an array for questions and answers
 var questions= [
@@ -129,6 +129,7 @@ console.log('more')
     //changes the start button to say restart and removes the hide class to make visible again
     startButton.innerText = 'Restart'
     startButton.classList.remove('hide')
+    nextButton.classList.add('hide')
 }
 }
 
