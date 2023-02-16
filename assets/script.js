@@ -3,7 +3,7 @@ var questionEl = document.getElementById('question.card')
 var questionTxt= document.getElementById('question')
 var answerBtn= document.getElementById('Answers')
 var nextButton = document.getElementById('next-button')
-let shuffledQuestions, currentQuestionIndex
+
 // set an array for questions and answers
 var questions= [
     {
@@ -57,8 +57,8 @@ var questions= [
 ]
 
 
-
-
+let shuffledQuestions =  questions.sort(() => Math.random()-.5)
+let currentQuestionIndex = 0
 
 //start button element should activate startQuiz function
 startButton.addEventListener('click',startQuiz)
@@ -73,8 +73,9 @@ function startQuiz() {
     startButton.classList.add('hide')
     //display the question
     questionEl.classList.remove('hide')
+    nextButton.classList.remove('hide')
     //randomizes question array
-    shuffledQuestion = questions.sort(() => Math.random()-.5)
+     shuffledQuestions = questions.sort(() => Math.random()-.5)
     //sets the question index variable to 0 to start at the beginning of the array
     currentQuestionIndex=0
     //executes the set Question function
@@ -85,7 +86,7 @@ function setQuestion () {
     //executes resetState function
     resetState()
     //executes show Question fuctions for the current index of the shuffled array
-    showQuestion(shuffledQuestion[currentQuestionIndex])
+    showQuestion(shuffledQuestions[currentQuestionIndex])
 }
 //select question from array
 function showQuestion(question) {
@@ -114,6 +115,13 @@ function nextQuestion(){
     //changes index and then run the set question function for the new index
     currentQuestionIndex++
     setQuestion()
+    if (shuffledQuestions.length > currentQuestionIndex +1 ){
+    setQuestion()
+    }else{
+    startButton.innerText = 'Restart'
+    startButton.classList.remove('hide')
+    nextButton.classList.add('hide')
+    }
 }
 //Create a function that submits selected answer
 function selectAnswer (){
@@ -123,14 +131,6 @@ setStatusClass(document.body, correct)
 Array.from(answerBtn.children).forEach(button => {
     setStatusClass(button, button.dataset.correct)
 })
-if (shuffledQuestions.length > currentQuestionIndex +1 ){
-console.log('more')
-} else {
-    //changes the start button to say restart and removes the hide class to make visible again
-    startButton.innerText = 'Restart'
-    startButton.classList.remove('hide')
-    nextButton.classList.add('hide')
-}
 }
 
 function setStatusClass(){
