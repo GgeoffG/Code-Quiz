@@ -127,7 +127,6 @@ function nextQuestion(){
 function selectAnswer (){
 var selectedButton = Event.target
 var correct= selectedButton.dataset.correct
-setStatusClass(document.body, correct)
 Array.from(answerBtn.children).forEach(button => {
     setStatusClass(button, button.dataset.correct)
 })

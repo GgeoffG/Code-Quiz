@@ -33,7 +33,8 @@ body{
 }
 
 .btn {
-    background-color: #677267; ;  
+    background-color: #dcb0e9; ;  
+    max-width: 400px;
 }
 
 .btn:hover {
@@ -50,4 +51,11 @@ body{
 
 .hide{
     visibility: hidden;
+}
+
+.correct{
+    background-color: rgb(110, 212, 110);
+}
+.wrong {
+    background-color: rgb(226, 66, 66);
 }
