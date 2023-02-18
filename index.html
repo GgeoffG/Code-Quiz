@@ -5,13 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-compatible" content="ie=edge">
     <title>The Coding Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/styles.css">
 
 </head>
 
 <body>
     <!--Container will wrap the page contents-->
-    <section class="container">
+    <section class="row container">
         <header>
             <h1>Test your coding knowledge</h1>
         </header>
@@ -23,15 +24,17 @@
         </section>
         <!--Answer form-->
         <section class="btn-display" id="Answers">
-            <button class="btn">Answer1</button>
-            <button class="btn">Answer2</button>
-            <button class="btn">Answer3</button>
-            <button class="btn">Answer4</button>
+            <button class="btn" id="A1">Answer1</button>
+            <button class="btn" id="A2">Answer2</button>
+            <button class="btn" id="A3">Answer3</button>
+            <button class="btn" id="A4">Answer4</button>
         </section class="controls">
         <button id="start-btn" class="start-btn btn">Begin Quiz</button>
         <button id="next-button" class="next-btn btn hide">Next Question</button>
         </section>
+        <section class='row hide' id="score">Your Score!</section>
         </section>
+        
    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 

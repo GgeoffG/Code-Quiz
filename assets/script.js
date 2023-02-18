@@ -3,14 +3,14 @@ var questionEl = document.getElementById('question.card')
 var questionTxt= document.getElementById('question')
 var answerBtn= document.getElementById('Answers')
 var nextButton = document.getElementById('next-button')
-
+var scoreEl= document.getElementById('score')
 // set an array for questions and answers
 var questions= [
     {
         question: 'What does HTML stand for?',
         answers: [
             {text: 'Hypertext Markup Language', correct: true},
-            {text: 'Im no 100% sure', correct: false}
+            {text: 'Im not 100% sure', correct: false}
         ]
     },
     {
@@ -121,30 +121,26 @@ function nextQuestion(){
     startButton.innerText = 'Restart'
     startButton.classList.remove('hide')
     nextButton.classList.add('hide')
+    scoreEl.classList.remove('hide')
     }
 }
 //Create a function that submits selected answer
-function selectAnswer (){
-var selectedButton = Event.target
+function selectAnswer (event){
+var selectedButton = event.target
 var correct= selectedButton.dataset.correct
 Array.from(answerBtn.children).forEach(button => {
-    setStatusClass(button, button.dataset.correct)
-})
-}
-
-function setStatusClass(){
-    clearStatusClass(element)
+    button.classList.remove('correct')
+    button.classList.remove('wrong') 
     if (correct){
-    element.classList.add('correct')
-    } else {
-        element.classList.add('wrong')
-    }
+        selectedButton.classList.add('correct')
+        } else {
+            selectedButton.classList.add('wrong')
+        }
+    answerBtn.disabled=true
+})
+
 }
 
-function clearStatusClass(element) {
-    element.classList.remove('correct')
-    element.classList.remove('wrong') 
-}
 //removes previous answer buttons
 function resetState(){
 while (answerBtn.firstChild){
