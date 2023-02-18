@@ -4,20 +4,28 @@ var questionTxt= document.getElementById('question')
 var answerBtn= document.getElementById('Answers')
 var nextButton = document.getElementById('next-button')
 var scoreEl= document.getElementById('score')
+var scoreDis=document.getElementById('scoreDis')
+var score= 0
+
 // set an array for questions and answers
 var questions= [
     {
         question: 'What does HTML stand for?',
         answers: [
             {text: 'Hypertext Markup Language', correct: true},
-            {text: 'Im not 100% sure', correct: false}
+            {text: 'Im not 100% sure', correct: false},
+            {text: 'Home Telemark Locator', correct: false},
+            {text: 'None of the above', correct:false},
         ]
     },
     {
         question: 'What does CSS stand for?',
         answers:[
             {text: 'Could you repeat the question?', correct:false},
-            {text: 'Cascading Style Sheets', correct:true}
+            {text: 'Cascading Style Sheets', correct:true},
+            {text: 'Color Size and Scope', correct:false},
+            {text: 'Collapsible Style Storage', correct:false},
+
         ]
     
     },
@@ -25,7 +33,9 @@ var questions= [
         question: 'what does the method .appendChild() do?',
         answers:[
             {text: 'I didnt quite catch that part', correct:false},
-            {text: 'Adds a child element to the targeted parent', correct:true}
+            {text: 'Adds a child element to the targeted parent', correct:true},
+            {text: 'Removes a child element from the trageted parent', correct:false},
+            {text: 'Creates an element as the child of the targeted parent', correct:false},
         ]
     
     }
@@ -33,8 +43,10 @@ var questions= [
     {
         question: 'How do you create a timer function?',
         answers:[
-            {text: 'setInterval', correct:true},
-            {text: 'Use a stopwatch', correct:false}
+            {text: 'setInterval()', correct:true},
+            {text: 'Use a stopwatch', correct:false},
+            {text: 'intervalSet()', correct:false},
+            {text: 'timer.create()', correct:false},
         ]
     
     },
@@ -42,7 +54,7 @@ var questions= [
         question: 'Please god let this work',
         answers:[
             {text: 'This doesnt work', correct:false},
-            {text: 'This does work?', correct:true}
+            {text: 'This does work?', correct:true},
         ]
     
     },
@@ -50,7 +62,7 @@ var questions= [
         question: 'Ill totally remember to fill in some more actual question',
         answers:[
             {text: 'He totally wont forget', correct:false},
-            {text: 'He totally will forget', correct:true}
+            {text: 'He totally will forget', correct:true},
         ]
     
     }
@@ -69,6 +81,7 @@ nextButton.addEventListener('click', nextQuestion)
 //Create a function that starts the quiz
 function startQuiz() {
     console.log('started')
+    clearStorage()
     //hide the start button after the quiz starts
     startButton.classList.add('hide')
     //display the question
@@ -80,6 +93,7 @@ function startQuiz() {
     currentQuestionIndex=0
     //executes the set Question function
     setQuestion()
+    nextButton.disabled=true
 }
 //Create a function that sets the question
 function setQuestion () {
@@ -114,6 +128,7 @@ question.answers.forEach(answer => {
 function nextQuestion(){
     //changes index and then run the set question function for the new index
     currentQuestionIndex++
+
     setQuestion()
     if (shuffledQuestions.length > currentQuestionIndex +1 ){
     setQuestion()
@@ -122,22 +137,28 @@ function nextQuestion(){
     startButton.classList.remove('hide')
     nextButton.classList.add('hide')
     scoreEl.classList.remove('hide')
+    scoreDis.innerText= score
     }
 }
 //Create a function that submits selected answer
 function selectAnswer (event){
 var selectedButton = event.target
 var correct= selectedButton.dataset.correct
+nextButton.disabled=false
 Array.from(answerBtn.children).forEach(button => {
     button.classList.remove('correct')
     button.classList.remove('wrong') 
-    if (correct){
-        selectedButton.classList.add('correct')
-        } else {
-            selectedButton.classList.add('wrong')
-        }
-    answerBtn.disabled=true
+       // if(button !== event.target)
+    button.disabled=true
 })
+if (correct){
+    selectedButton.classList.add('correct'),
+    score++
+    localStorage.setItem('score',score)
+    score=localStorage.getItem('score',score)
+    } else {
+        selectedButton.classList.add('wrong')
+    }
 
 }
 
@@ -147,3 +168,9 @@ while (answerBtn.firstChild){
     answerBtn.removeChild (answerBtn.firstChild)
 }
 }
+
+function clearStorage(){
+    localStorage.clear()
+}
+
+clearStorage()
