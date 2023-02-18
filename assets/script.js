@@ -167,8 +167,9 @@ if (correct){
         startButton.classList.remove('hide')
         scoreEl.classList.remove('hide')
     }
-    scoreDis.innerText= score
+    scoreDis.innerText= (Math.floor(score/questions.legnth) *100)+ '%'
 }
+
 
 //removes previous answer buttons
 function resetState(){
