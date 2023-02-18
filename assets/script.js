@@ -86,7 +86,7 @@ function startQuiz() {
     startButton.classList.add('hide')
     //display the question
     questionEl.classList.remove('hide')
-    nextButton.classList.remove('hide')
+    //nextButton.classList.remove('hide')
     //randomizes question array
      shuffledQuestions = questions.sort(() => Math.random()-.5)
     //sets the question index variable to 0 to start at the beginning of the array
@@ -94,6 +94,7 @@ function startQuiz() {
     //executes the set Question function
     setQuestion()
     nextButton.disabled=true
+    scoreEl.classList.add('hide')
 }
 //Create a function that sets the question
 function setQuestion () {
@@ -128,16 +129,16 @@ question.answers.forEach(answer => {
 function nextQuestion(){
     //changes index and then run the set question function for the new index
     currentQuestionIndex++
-
+    nextButton.classList.add('hide')
     setQuestion()
     if (shuffledQuestions.length > currentQuestionIndex +1 ){
     setQuestion()
     }else{
     startButton.innerText = 'Restart'
-    startButton.classList.remove('hide')
-    nextButton.classList.add('hide')
-    scoreEl.classList.remove('hide')
-    scoreDis.innerText= score
+    //startButton.classList.remove('hide')
+    
+    //scoreEl.classList.remove('hide')
+    
     }
 }
 //Create a function that submits selected answer
@@ -159,7 +160,14 @@ if (correct){
     } else {
         selectedButton.classList.add('wrong')
     }
-
+    if (shuffledQuestions.length > currentQuestionIndex +1){
+        nextButton.classList.remove('hide')
+    }
+    else{
+        startButton.classList.remove('hide')
+        scoreEl.classList.remove('hide')
+    }
+    scoreDis.innerText= score
 }
 
 //removes previous answer buttons
@@ -171,6 +179,7 @@ while (answerBtn.firstChild){
 
 function clearStorage(){
     localStorage.clear()
+    score=0
 }
 
 clearStorage()

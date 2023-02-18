@@ -53,9 +53,11 @@ body{
     visibility: hidden;
 }
 
-.correct button:disabled{
+.correct:disabled{
     background-color: rgb(110, 212, 110);
+    opacity: 100;
 }
-.wrong {
+.wrong:disabled {
     background-color: rgb(226, 66, 66);
+    opacity: 100;
 }
