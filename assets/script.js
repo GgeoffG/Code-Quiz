@@ -7,7 +7,7 @@ var scoreEl= document.getElementById('score')
 var scoreDis=document.getElementById('scoreDis')
 var score= 0
 var h1=document.getElementById('time')
-const timeInt=setInterval(timer,1000)
+
 // set an array for questions and answers
 var questions= [
     {
@@ -100,7 +100,9 @@ function startQuiz() {
     nextButton.disabled=true
     scoreEl.classList.add('hide')
     timercount=100
-    timer(timeInt)
+    const timeInt=setInterval(timer,1000)
+    
+    
     
 }
 //Create a function that sets the question
@@ -173,7 +175,7 @@ if (correct){
     else{
         startButton.classList.remove('hide')
         scoreEl.classList.remove('hide')
-        clearInterval(timeInt)
+        clearInterval(timer)
         h1.innerText = "Congratulations!"
     }
     scoreDis.innerText= Math.floor((score/questions.length) * 100) + '%'
