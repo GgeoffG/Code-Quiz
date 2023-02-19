@@ -6,7 +6,8 @@ var nextButton = document.getElementById('next-button')
 var scoreEl= document.getElementById('score')
 var scoreDis=document.getElementById('scoreDis')
 var score= 0
-
+var timercount=100
+var h1=document.getElementById('time')
 // set an array for questions and answers
 var questions= [
     {
@@ -95,6 +96,7 @@ function startQuiz() {
     setQuestion()
     nextButton.disabled=true
     scoreEl.classList.add('hide')
+    timer()
 }
 //Create a function that sets the question
 function setQuestion () {
@@ -184,3 +186,13 @@ function clearStorage(){
 }
 
 clearStorage()
+
+function timer(){
+    if (timercount>0)
+    timercount--
+    h1.innerText=timercount + 'secondsleft'
+    if(timercount===0)
+    h1.innerText= "Gameover!"
+} 
+
+const gameTimer= setInterval(timer,1000)
