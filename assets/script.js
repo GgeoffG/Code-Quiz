@@ -6,8 +6,8 @@ var nextButton = document.getElementById('next-button')
 var scoreEl= document.getElementById('score')
 var scoreDis=document.getElementById('scoreDis')
 var score= 0
-var timercount=100
 var h1=document.getElementById('time')
+const timeInt=setInterval(timer,1000)
 // set an array for questions and answers
 var questions= [
     {
@@ -82,6 +82,9 @@ nextButton.addEventListener('click', nextQuestion)
 //Create a function that starts the quiz
 function startQuiz() {
     console.log('started')
+    if (startButton.innerText == 'Try Again'){
+       location.reload() 
+    }
     clearStorage()
     //hide the start button after the quiz starts
     startButton.classList.add('hide')
@@ -96,7 +99,9 @@ function startQuiz() {
     setQuestion()
     nextButton.disabled=true
     scoreEl.classList.add('hide')
-    timer()
+    timercount=100
+    timer(timeInt)
+    
 }
 //Create a function that sets the question
 function setQuestion () {
@@ -168,6 +173,8 @@ if (correct){
     else{
         startButton.classList.remove('hide')
         scoreEl.classList.remove('hide')
+        clearInterval(timeInt)
+        h1.innerText = "Congratulations!"
     }
     scoreDis.innerText= Math.floor((score/questions.length) * 100) + '%'
 }
@@ -182,17 +189,25 @@ while (answerBtn.firstChild){
 
 function clearStorage(){
     localStorage.clear()
-    score=0
+    score = 0
 }
 
 clearStorage()
 
-function timer(){
-    if (timercount>0)
-    timercount--
-    h1.innerText=timercount + 'secondsleft'
-    if(timercount===0)
-    h1.innerText= "Gameover!"
+function timer() {
+    if (timercount > 0)
+        timercount--
+    h1.innerText = timercount + 'secondsleft'
+    if (timercount === 0) {
+        h1.innerText = "Gameover!"
+        Array.from(answerBtn.children).forEach(button => {
+            button.classList.remove('correct')
+            button.classList.remove('wrong')
+            button.disabled = true
+            startButton.innerText = 'Try Again'
+            startButton.classList.remove('hide')
+        }
+        )
+    }
 } 
 
-const gameTimer= setInterval(timer,1000)
