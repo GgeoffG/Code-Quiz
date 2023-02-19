@@ -7,7 +7,7 @@ var scoreEl= document.getElementById('score')
 var scoreDis=document.getElementById('scoreDis')
 var score= 0
 var h1=document.getElementById('time')
-
+let IntervalId
 // set an array for questions and answers
 var questions= [
     {
@@ -82,7 +82,7 @@ nextButton.addEventListener('click', nextQuestion)
 //Create a function that starts the quiz
 function startQuiz() {
     console.log('started')
-    if (startButton.innerText == 'Try Again'){
+    if (startButton.innerText == 'Try Again'|| startButton.innerText == 'Restart'){
        location.reload() 
     }
     clearStorage()
@@ -100,7 +100,8 @@ function startQuiz() {
     nextButton.disabled=true
     scoreEl.classList.add('hide')
     timercount=100
-    const timeInt=setInterval(timer,1000)
+    h1.innerText=timercount + ' seconds left'
+    IntervalId=setInterval(timer,1000)
     
     
     
@@ -175,7 +176,7 @@ if (correct){
     else{
         startButton.classList.remove('hide')
         scoreEl.classList.remove('hide')
-        clearInterval(timer)
+        clearInterval(IntervalId)
         h1.innerText = "Congratulations!"
     }
     scoreDis.innerText= Math.floor((score/questions.length) * 100) + '%'
