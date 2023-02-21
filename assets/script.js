@@ -5,9 +5,12 @@ var answerBtn= document.getElementById('Answers')
 var nextButton = document.getElementById('next-button')
 var scoreEl= document.getElementById('score')
 var scoreDis=document.getElementById('scoreDis')
+var prevScoreEl= document.getElementById('prevScore')
+var prevScoreInput= document.getElementById('initials')
 var score= 0
 var h1=document.getElementById('time')
 let IntervalId
+let timercount
 // set an array for questions and answers
 var questions= [
     {
@@ -52,18 +55,18 @@ var questions= [
     
     },
     {
-        question: 'Please god let this work',
+        question: 'Coding is fun',
         answers:[
-            {text: 'This doesnt work', correct:false},
-            {text: 'This does work?', correct:true},
+            {text: 'False', correct:false},
+            {text: 'True', correct:true},
         ]
     
     },
     {
-        question: 'Ill totally remember to fill in some more actual question',
+        question: 'The DOM refers to a family tree like structure that is used to traverse your CSS page',
         answers:[
-            {text: 'He totally wont forget', correct:false},
-            {text: 'He totally will forget', correct:true},
+            {text: 'True', correct:false},
+            {text: 'False', correct:true},
         ]
     
     }
@@ -169,6 +172,9 @@ if (correct){
     score=localStorage.getItem('score',score)
     } else {
         selectedButton.classList.add('wrong')
+        h1.classList.add('wrong')
+       timercount= timercount -5
+       h1.innerHTML=timercount + ' seconds left'
     }
     if (shuffledQuestions.length > currentQuestionIndex +1){
         nextButton.classList.remove('hide')
@@ -176,6 +182,7 @@ if (correct){
     else{
         startButton.classList.remove('hide')
         scoreEl.classList.remove('hide')
+        h1.classList.remove('wrong')
         clearInterval(IntervalId)
         h1.innerText = "Congratulations!"
     }
@@ -200,7 +207,8 @@ clearStorage()
 function timer() {
     if (timercount > 0)
         timercount--
-    h1.innerText = timercount + 'secondsleft'
+        h1.classList.remove('wrong')
+    h1.innerText = timercount + ' seconds left'
     if (timercount === 0) {
         h1.innerText = "Gameover!"
         Array.from(answerBtn.children).forEach(button => {
@@ -213,4 +221,3 @@ function timer() {
         )
     }
 } 
-
