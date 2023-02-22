@@ -238,5 +238,6 @@ const scoreKeep = (ev)=>{
     localStorage.setItem('saved score',Math.floor((score/questions.length) * 100) + '%')
     inInput=document.getElementById('inInput').value
     localStorage.setItem('saved initials', inInput)
+    location.reload()
 }
 submit.addEventListener('click',scoreKeep)
