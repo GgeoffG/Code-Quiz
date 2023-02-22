@@ -5,9 +5,10 @@ var answerBtn= document.getElementById('Answers')
 var nextButton = document.getElementById('next-button')
 var scoreEl= document.getElementById('score')
 var scoreDis=document.getElementById('scoreDis')
-var prevScoreEl= document.getElementById('prevScore')
-var prevScoreInput= document.getElementById('initials')
+var lastScore=document.getElementById('lastScore')
+var submit=document.getElementById('submit')
 var score= 0
+var scoreKeeperEl=document.getElementById('scoreKeeperEl')
 var h1=document.getElementById('time')
 let IntervalId
 let timercount
@@ -180,13 +181,23 @@ if (correct){
         nextButton.classList.remove('hide')
     }
     else{
+        scoreKeeperEl.classList.remove('hide')
         startButton.classList.remove('hide')
         scoreEl.classList.remove('hide')
         h1.classList.remove('wrong')
         clearInterval(IntervalId)
         h1.innerText = "Congratulations!"
+
     }
+    var getInt= localStorage.getItem('saved initials',inInput)
+    var getScore= localStorage.getItem('saved score',Math.floor((score/questions.length) * 100) + '%')
     scoreDis.innerText= Math.floor((score/questions.length) * 100) + '%'
+    if(getInt && getScore){
+    lastScore.innerText= getInt + ':'+' ' + getScore
+    }
+    else {
+        lastScore.innerText='Save your score to compare next time!'
+    }
 }
 
 
@@ -198,8 +209,8 @@ while (answerBtn.firstChild){
 }
 
 function clearStorage(){
-    localStorage.clear()
     score = 0
+    localStorage.setItem('score',score)
 }
 
 clearStorage()
@@ -221,3 +232,11 @@ function timer() {
         )
     }
 } 
+
+const scoreKeep = (ev)=>{
+    ev.preventDefault()
+    localStorage.setItem('saved score',Math.floor((score/questions.length) * 100) + '%')
+    inInput=document.getElementById('inInput').value
+    localStorage.setItem('saved initials', inInput)
+}
+submit.addEventListener('click',scoreKeep)

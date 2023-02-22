@@ -28,10 +28,17 @@
         </section class="controls">
         <button id="start-btn" class="start-btn btn">Begin Quiz</button>
         <button id="next-button" class="next-btn btn hide">Next Question</button>
-        <section class='row hide' id="score">Your Score!
+        <section class='row hide' id="score">
+            <h3>Your Score!</h3>
             <p id="scoreDis"></p>
+           <h3> Last Score! </h3>
+            <p id="lastScore"></p>
         </section>
-        
+        <form class="row align-items-center col-3 hide" id="scoreKeeperEl">
+            <label for="initials">Initials</label>
+            <input type='text' id="inInput"/>
+            <btn class= 'btn my-3' id="submit">Submit Score!</btn>
+        </form>
         </section>
         
         </section>
