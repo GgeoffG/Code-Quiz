@@ -33,8 +33,11 @@ If the final question is not answered before the timer ends the display will sho
 
 ## App Images
 ![Start Quiz](https://github.com/GgeoffG/Code-Quiz/blob/main/Appscreenshots/Untitled.png)
+___________________________________________________________________________________________
 ![Mid Quiz](./Appscreenshots/midquiz.png)
+___________________________________________________________________________________________
 ![End Quiz](./Appscreenshots/endquiz.png)
+____________________________________________________________________________________________
 ## Credits
 
 UofO bootcamp provided the guidelines and knowledge to help with the building of this application.
