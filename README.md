@@ -32,7 +32,9 @@ When the final quesion is answered the display will show the users score as a pe
 If the final question is not answered before the timer ends the display will show a button that says 'try again'
 
 ## App Images
-
+![Start Quiz](https://github.com/GgeoffG/Code-Quiz/blob/main/Appscreenshots/Untitled.png)
+![Mid Quiz](./Appscreenshots/midquiz.png)
+![End Quiz](./Appscreenshots/endquiz.png)
 ## Credits
 
 UofO bootcamp provided the guidelines and knowledge to help with the building of this application.
